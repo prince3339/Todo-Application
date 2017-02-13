@@ -2,7 +2,7 @@
   var vm = window;
   vm.addTodo = addTodo;
 
-  var modal = document.getElementById('customModal');
+  var modal = document.getElementById('addModal');
   vm.onload = function() {
     /////
   }
