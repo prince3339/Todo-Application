@@ -1,3 +1,7 @@
+//Developer: Sabbir Ahmed Siddiquee,
+//Software Engineer, Selise rockin' software
+//Git profile: https://github.com/prince3339
+
 (function (window) {
   var vm = window;
   vm.showAllTodos = showAllTodos;
