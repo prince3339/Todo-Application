@@ -16,7 +16,7 @@
         <section class="selise__modal__content selise__todo__container">
             <div class="full-width">
               <main class="margin-top-10">
-                <form name="add_todo"
+                <form name="add_todo_form"
                       onsubmit="addTodo(event)">
                   <section class="selise__todo__container__inner padding-16">
                     <header class="text-center opacity-50 margin-bottom-16">
@@ -66,7 +66,7 @@
         <section class="selise__modal__content selise__todo__container">
             <div class="full-width">
               <main class="margin-top-10">
-                <form name="add_todo"
+                <form name="edit_todo_form"
                       onsubmit="updateTodo(event)">
                   <section class="selise__todo__container__inner padding-16">
                     <header class="text-center opacity-50 margin-bottom-16">
@@ -260,8 +260,10 @@
             </nav>
         </footer>
     </section><!-- todo container end -->
+    <script src="js/config.js"></script>
+    <script src="js/model.js"></script>
     <script src="js/showData.js"></script>
-    <script src="js/insertData.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/todoLib.js"></script>
+    <script src="js/controller.js"></script>
   </body>
 </html>
