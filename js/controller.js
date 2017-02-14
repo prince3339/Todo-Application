@@ -23,7 +23,7 @@
     showSearchedList: showSearchedList,
   }
 
-  console.log(config);
+  //console.log(config);
 
   function addTodo (event) {
     event.preventDefault();

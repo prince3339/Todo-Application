@@ -5,13 +5,13 @@
 //safe code mode
 // here ; is used to make sure that other codes loaded from different library/framework/file finished
 
-//This service provides data based on requirements to viewRenderer engine 
+//This service provides data based on requirements to viewRenderer engine
 ;(function (window) {
   'use strict';
   var vm = window;
 
   config.fn.showAllTodos = showAllTodos
-  console.log(config.fn);
+  //console.log(config.fn);
 
   // vm.onload = function() {
   //   console.log(window.l);
