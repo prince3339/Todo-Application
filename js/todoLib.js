@@ -137,7 +137,7 @@
 
       var p = document.createElement('p');
       p.className = 'font-size-fixed-18 margin-0 opacity-50';
-      p.innerText = config.msg.noCompletedTask;
+      p.innerText = msg;
 
       unavailable_msg.appendChild(p);
 

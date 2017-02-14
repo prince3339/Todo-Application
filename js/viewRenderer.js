@@ -12,6 +12,7 @@
   // vm.onload = function() {
   //   console.log(window.l);
   // }
+  var searchedList, todos_sorted;
 
   function showAllTodos (status, search_keyword){
 
@@ -26,16 +27,17 @@
       switch (status) {
           case 'all':
               if(search_keyword) {
-                  var searchedList = T$().getSearchedResult(search_keyword, todos);
-                  if(!searchedList) {
+                  searchedList = T$().getSearchedResult(search_keyword, todos);
+                  if(searchedList.length === 0) {
                     T$().errorMsgGen(config.msg.noMatch);
+                    todos_sorted = [];
                   }
                   else {
-                    var todos_sorted = T$().sortList(searchedList);
+                    todos_sorted = T$().sortList(searchedList);
                   }
                 }
                 else {
-                  var todos_sorted = T$().sortList(todos);
+                    todos_sorted = T$().sortList(todos);
                 }
               break;
           case 'done':
@@ -43,14 +45,15 @@
                 return value.status == true;
               });
               if(search_keyword) {
-                var searchedList = T$().getSearchedResult(search_keyword, filtered_done);
-                if(!searchedList) {
+                searchedList = T$().getSearchedResult(search_keyword, filtered_done);
+                if(searchedList !== undefined && searchedList.length === 0) {
                   T$().errorMsgGen(config.msg.noMatch);
+                  todos_sorted = [];
                 }else {
-                  var todos_sorted = T$().sortList(searchedList);
+                  todos_sorted = T$().sortList(searchedList);
                 }
               }else {
-                var todos_sorted = T$().sortList(filtered_done);
+                  todos_sorted = T$().sortList(filtered_done);
               }
               break;
           case 'pending':
@@ -58,28 +61,29 @@
                 return value.status != true;
               });
               if(search_keyword) {
-                var searchedList = T$().getSearchedResult(search_keyword, filtered_pending);
+                searchedList = T$().getSearchedResult(search_keyword, filtered_pending);
 
-                if(!searchedList) {
+                if(searchedList !== undefined && searchedList.length === 0) {
                   T$().errorMsgGen(config.msg.noMatch);
+                  todos_sorted = [];
                 }else {
-                  var todos_sorted = T$().sortList(searchedList);
+                  todos_sorted = T$().sortList(searchedList);
                 }
 
               }else {
-                var todos_sorted = T$().sortList(filtered_pending);
+                  todos_sorted = T$().sortList(filtered_pending);
               }
               break;
           default:
               if(search_keyword) {
-                var searchedList = T$().getSearchedResult(search_keyword, todos);
-                if(!searchedList) {
+                searchedList = T$().getSearchedResult(search_keyword, todos);
+                if(searchedList !== undefined && searchedList.length === 0) {
                   T$().errorMsgGen(config.msg.noMatch);
                 }else {
-                  var todos_sorted = T$().sortList(searchedList);
+                  todos_sorted = T$().sortList(searchedList);
                 }
               }else {
-                var todos_sorted = T$().sortList(todos);
+                  todos_sorted = T$().sortList(todos);
               }
       }
 
@@ -89,7 +93,7 @@
       }
 
 
-      if(todos_sorted.length < 1) {
+      if(todos_sorted.length < 1 && (search_keyword === "" || search_keyword === undefined)) {
         switch (status) {
           case 'done':
                 T$().errorMsgGen(config.msg.noCompletedTask);
