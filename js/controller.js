@@ -5,17 +5,20 @@
 (function(window){
   var vm = window;
 
-  var data = getTodos();
 
   function addTodo (event) {
+    var data = getTodos();
     T$(data).add(event);
   }
 
   function updateTodo (event) {
+    var data = getTodos();
+
     T$(data).update(event);
   }
 
   function markComplete (element, id) {
+    var data = getTodos();
     for(var i=0; i<data.length; i++) {
       if (data[i].id === id) {
         element.checked ? data[i].status = true : data[i].status = false;
@@ -28,6 +31,7 @@
   }
 
   function deleteTask (id) {
+    var data = getTodos();
     var isConfirm = confirm('Are you sure you want to delete this task?');
     if(isConfirm) {
       for(var i=0; i<data.length; i++) {
@@ -58,6 +62,7 @@
   }
 
   function showEditModal (event, id) {
+    var data = getTodos();
     event.preventDefault();
     var todo_filtered = data.filter(function(item) {
       return item.id == id;
