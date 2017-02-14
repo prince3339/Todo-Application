@@ -3,18 +3,47 @@
 //Git profile: https://github.com/prince3339
 
 (function(window){
+ 'use strict';
   var vm = window;
 
+  config.fn = {
+    addTodo: addTodo,
+    updateTodo: updateTodo,
+    markComplete: markComplete,
+    deleteTask: deleteTask,
+    showAddModal: showAddModal,
+    closeAddModal: closeAddModal,
+    showEditModal: showEditModal,
+    closeEditModal: closeEditModal,
+    showSearchedList: showSearchedList,
+  }
+
+  console.log(config);
 
   function addTodo (event) {
+    event.preventDefault();
+
+    var title = config.elems.todoTitle.value;
+    var description = config.elems.todoDescription.value;
+
     var data = getTodos();
-    T$(data).add(event);
+    T$(data).add(title, description);
   }
 
   function updateTodo (event) {
+    event.preventDefault();
+
     var data = getTodos();
 
-    T$(data).update(event);
+    var editableObj = {
+      title: config.elems.todoTitleEdit.value,
+      description: config.elems.todoDescriptionEdit.value,
+      id: config.elems.todEditId.value,
+      status: config.elems.todEditId.status,
+      editModal: config.elems.editModal
+    }
+
+    T$(data).update(editableObj);
   }
 
   function markComplete (element, id) {
@@ -28,8 +57,7 @@
     });
 
     T$().saveToLocalStorage('todos', data);
-    showAllTodos();
-
+    config.fn.showAllTodos('');
   }
 
   function deleteTask (id) {
@@ -46,10 +74,10 @@
       if(data.length == 0) {
         console.log('All items deleted.');
         T$().removeFromLocalStorage('todos')
-        showAllTodos();
+        config.fn.showAllTodos();
       }else {
         T$().saveToLocalStorage('todos', data);
-        showAllTodos();
+        config.fn.showAllTodos();
       }
 
     }
@@ -57,12 +85,12 @@
 
   function showAddModal (event) {
     event.preventDefault();
-    T$().show(config.addModal);
+    T$().show(config.elems.addModal);
   }
 
   function closeAddModal (event) {
     event.preventDefault();
-    T$().hide(config.addModal);
+    T$().hide(config.elems.addModal);
   }
 
   function showEditModal (event, id) {
@@ -72,49 +100,38 @@
       return item.id == id;
     });
 
-    config.todoTitleEdit.value = todo_filtered[0].title;
+    config.elems.todoTitleEdit.value = todo_filtered[0].title;
     if(todo_filtered[0].description) {
-      config.todoDescriptionEdit.value = todo_filtered[0].description;
+      config.elems.todoDescriptionEdit.value = todo_filtered[0].description;
     }
-    config.todEditId.value = todo_filtered[0].id;
+    config.elems.todEditId.value = todo_filtered[0].id;
 
-    T$().show(config.editModal);
+    T$().show(config.elems.editModal);
   }
 
   function closeEditModal (event) {
     event.preventDefault();
-    T$().hide(config.editModal);
+    T$().hide(config.elems.editModal);
   }
 
   function showSearchedList() {
-    var search_keyword = searchKeyWordElem.value;
-    showAllTodos('', search_keyword);
+    var search_keyword = config.elems.searchKeyWordElem.value;
+    config.fn.showAllTodos('', search_keyword);
   }
 
 
   vm.onload = function() {
-    vm.addTodo = addTodo;
-    vm.updateTodo = updateTodo;
-    vm.markComplete = markComplete;
-    vm.deleteTask = deleteTask;
-    vm.showAddModal = showAddModal;
-    vm.closeAddModal = closeAddModal;
-    vm.showEditModal = showEditModal;
-    vm.closeEditModal = closeEditModal;
-    vm.showSearchedList = showSearchedList;
-    
+    config.fn.showAllTodos();
     vm.onclick = function(event) {
         switch (event.target) {
-          case config.addModal:
-            T$().hide(config.addModal);
+          case config.elems.addModal:
+            T$().hide(config.elems.addModal);
             break;
-          case config.editModal:
-            T$().hide(config.editModal);
+          case config.elems.editModal:
+            T$().hide(config.elems.editModal);
             break;
         }
     }
-
-    showAllTodos();
   }
 
 })(window)

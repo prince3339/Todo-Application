@@ -3,8 +3,12 @@
 //Git profile: https://github.com/prince3339
 
 (function (window) {
+  'use strict';
   var vm = window;
-  vm.showAllTodos = showAllTodos;
+
+  config.fn.showAllTodos = showAllTodos
+  console.log(config.fn);
+
   // vm.onload = function() {
   //   console.log(window.l);
   // }
@@ -13,19 +17,26 @@
 
     var todos = getTodos();
 
-    var listContainer = config.listContainer;
+    var listContainer = config.elems.listContainer;
     listContainer.innerHTML = '';
 
-    var status = status || config.checkedRadioBtn.value;
-    if(localStorage.todos) {
+    var status = status || document.querySelector('input[name=filter_todo]:checked').value;
+
+    if(todos) {
       switch (status) {
           case 'all':
               if(search_keyword) {
-                var searchedList = T$().getSearchedResult(search_keyword, todos);
-                var todos_sorted = T$().sortList(searchedList);
-              }else {
-                var todos_sorted = T$().sortList(todos);
-              }
+                  var searchedList = T$().getSearchedResult(search_keyword, todos);
+                  if(!searchedList) {
+                    T$().errorMsgGen(config.msg.noMatch);
+                  }
+                  else {
+                    var todos_sorted = T$().sortList(searchedList);
+                  }
+                }
+                else {
+                  var todos_sorted = T$().sortList(todos);
+                }
               break;
           case 'done':
               var filtered_done = todos.filter(function(value) {
@@ -33,7 +44,11 @@
               });
               if(search_keyword) {
                 var searchedList = T$().getSearchedResult(search_keyword, filtered_done);
-                var todos_sorted = T$().sortList(searchedList);
+                if(!searchedList) {
+                  T$().errorMsgGen(config.msg.noMatch);
+                }else {
+                  var todos_sorted = T$().sortList(searchedList);
+                }
               }else {
                 var todos_sorted = T$().sortList(filtered_done);
               }
@@ -44,7 +59,13 @@
               });
               if(search_keyword) {
                 var searchedList = T$().getSearchedResult(search_keyword, filtered_pending);
-                var todos_sorted = T$().sortList(searchedList);
+
+                if(!searchedList) {
+                  T$().errorMsgGen(config.msg.noMatch);
+                }else {
+                  var todos_sorted = T$().sortList(searchedList);
+                }
+
               }else {
                 var todos_sorted = T$().sortList(filtered_pending);
               }
@@ -52,49 +73,31 @@
           default:
               if(search_keyword) {
                 var searchedList = T$().getSearchedResult(search_keyword, todos);
-                var todos_sorted = sortList(searchedList);
+                if(!searchedList) {
+                  T$().errorMsgGen(config.msg.noMatch);
+                }else {
+                  var todos_sorted = T$().sortList(searchedList);
+                }
               }else {
                 var todos_sorted = T$().sortList(todos);
               }
       }
 
-      var unavailable_msg = document.getElementById('unavailable_msg');
+      var unavailable_msg = config.elems.unavailableMsgElem;
       if(unavailable_msg) {
-        unavailable_msg.className = 'display-none';
+        T$().hide(unavailable_msg);
       }
 
 
       if(todos_sorted.length < 1) {
-
         switch (status) {
           case 'done':
-                var unavailable_msg = document.createElement('li');
-                unavailable_msg.className = 'display-block padding-16 selise__todo__list text-center';
-                unavailable_msg.setAttribute('id', 'unavailable_msg');
-
-                var p = document.createElement('p');
-                p.className = 'font-size-fixed-18 margin-0 opacity-50';
-                p.innerText = "You have not completed any tasks yet.";
-
-                unavailable_msg.appendChild(p);
-
-                listContainer.appendChild(unavailable_msg);
+                T$().errorMsgGen(config.msg.noCompletedTask);
             break;
           case 'pending':
-                var unavailable_msg = document.createElement('li');
-                unavailable_msg.className = 'display-block padding-16 selise__todo__list text-center';
-                unavailable_msg.setAttribute('id', 'unavailable_msg');
-
-                var p = document.createElement('p');
-                p.className = 'font-size-fixed-18 margin-0 opacity-50';
-                p.innerText = "You don't have any pending tasks.";
-
-                unavailable_msg.appendChild(p);
-
-                listContainer.appendChild(unavailable_msg);
+                T$().errorMsgGen(config.msg.noPendingTasks);
             break;
           default:
-
         }
 
       }else {
@@ -126,7 +129,7 @@
             checkBox.setAttribute("type", "checkbox");
             checkBox.setAttribute("name", "todo_list");
             checkBox.className = 'done_todo';
-            checkBox.setAttribute('onChange', "markComplete(this," + "'" + todos_sorted[i].id + "'" +")");
+            checkBox.setAttribute('onChange', "config.fn.markComplete(this," + "'" + todos_sorted[i].id + "'" +")");
 
             if(todos_sorted[i].status){
               checkBox.setAttribute("checked", "true");
@@ -152,7 +155,7 @@
             button_1.className = 'margin-h-5 padding-5 border-none cur-pointer';
             button_1.setAttribute('role', 'button');
             button_1.setAttribute('aria-label', 'Make task done');
-            button_1.setAttribute('onclick', "showEditModal( event, " + "'" + todos_sorted[i].id + "'" +")");
+            button_1.setAttribute('onclick', "config.fn.showEditModal( event, " + "'" + todos_sorted[i].id + "'" +")");
             if(todos_sorted[i].status){
               button_1.setAttribute('disabled', 'true');
               button_1.className = 'margin-h-5 padding-5 border-none cur-not-allowed';
@@ -167,7 +170,7 @@
             button_2.className = 'border-none cur-pointer padding-5';
             button_2.setAttribute('role', 'button');
             button_2.setAttribute('aria-label', 'Delete this task');
-            button_2.setAttribute('onclick', "deleteTask(" + "'" + todos_sorted[i].id + "'" +")");
+            button_2.setAttribute('onclick', "config.fn.deleteTask(" + "'" + todos_sorted[i].id + "'" +")");
 
             var i_2 = document.createElement('i');
             i_2.className = 'zmdi zmdi-delete font-size-fixed-18 opacity-50';
@@ -184,20 +187,8 @@
       }
 
     }else {
-        var unavailable_msg = document.createElement('li');
-        unavailable_msg.className = 'display-block padding-16 selise__todo__list text-center';
-        unavailable_msg.setAttribute('id', 'unavailable_msg');
-
-        var p = document.createElement('p');
-        p.className = 'font-size-fixed-18 margin-0 opacity-50';
-        p.innerText = "You don't have any tasks.";
-
-        unavailable_msg.appendChild(p);
-
-        listContainer.appendChild(unavailable_msg);
+        T$().errorMsgGen(config.msg.noTasks);
       }
     }
-
-
 
 })(window)

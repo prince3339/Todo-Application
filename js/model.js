@@ -5,9 +5,14 @@
 //safe code mode
 // here ; is used to make sure that other codes loaded from different library/framework/file finished
 ;(function (window) {
+  'use strict';
   var vm = window;
 
   vm.getTodos = function () {
-    return JSON.parse(localStorage.getItem("todos"));
+    if(localStorage.todos) {
+      return JSON.parse(localStorage.getItem("todos"));
+    }else {
+      return;
+    }
   };
 })(window)

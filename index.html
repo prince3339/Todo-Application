@@ -17,7 +17,7 @@
             <div class="full-width">
               <main class="margin-top-10">
                 <form name="add_todo_form"
-                      onsubmit="addTodo(event)">
+                      onsubmit="config.fn.addTodo(event)">
                   <section class="selise__todo__container__inner padding-16">
                     <header class="text-center opacity-50 margin-bottom-16">
                       <h1 class="margin-0 font-size-fixed-24">Add New Todo</h1>
@@ -48,7 +48,7 @@
 
                         <button type="button"
                                 name="button"
-                                onclick="closeAddModal(event)"
+                                onclick="config.fn.closeAddModal(event)"
                                 class="padding-16 cur-pointer margin-left-16 font-size-fixed-16 opacity-50">
                           Cancel
                         </button>
@@ -67,7 +67,7 @@
             <div class="full-width">
               <main class="margin-top-10">
                 <form name="edit_todo_form"
-                      onsubmit="updateTodo(event)">
+                      onsubmit="config.fn.updateTodo(event)">
                   <section class="selise__todo__container__inner padding-16">
                     <header class="text-center opacity-50 margin-bottom-16">
                       <h1 class="margin-0 font-size-fixed-24">Edit this Todo</h1>
@@ -102,7 +102,7 @@
 
                         <button type="button"
                                 name="button"
-                                onclick="closeEditModal(event)"
+                                onclick="config.fn.closeEditModal(event)"
                                 class="padding-16 cur-pointer margin-left-16 font-size-fixed-16 opacity-50">
                           Cancel
                         </button>
@@ -130,13 +130,13 @@
                    type="search"
                    name="todo_search"
                    placeholder="Search Todos"
-                   onkeyup="showSearchedList()"
+                   onkeyup="config.fn.showSearchedList()"
                    id="search_key_word">
           </form>
 
           <button type="button"
                   name="button"
-                  onclick="showAddModal(event)"
+                  onclick="config.fn.showAddModal(event)"
                   tabindex="0"
                   role="button"
                   class="cur-pointer display-inline-block selise__todo__open-modal border-none margin-right-16"
@@ -152,7 +152,7 @@
                      name="filter_todo"
                      value="all"
                      checked
-                     onchange="showAllTodos('all')"
+                     onchange="config.fn.showAllTodos('all')"
                      id="showAllList">
                      <label class="font-size-fixed-14 margin-right-15 padding-left-5"
                             for="showAllList">All</label>
@@ -160,7 +160,7 @@
                      type="radio"
                      name="filter_todo"
                      value="done"
-                     onchange="showAllTodos('done')"
+                     onchange="config.fn.showAllTodos('done')"
                      id="showDoneList">
                      <label class="font-size-fixed-14 margin-right-15 padding-left-5"
                             for="showDoneList">Done</label>
@@ -168,7 +168,7 @@
                      type="radio"
                      name="filter_todo"
                      value="pending"
-                     onchange="showAllTodos('pending')"
+                     onchange="config.fn.showAllTodos('pending')"
                      id="showPendingList">
                      <label class="font-size-fixed-14 padding-left-5"
                             for="showPendingList">Pending</label>
@@ -262,8 +262,9 @@
     </section><!-- todo container end -->
     <script src="js/config.js"></script>
     <script src="js/model.js"></script>
-    <script src="js/viewRenderer.js"></script>
     <script src="js/todoLib.js"></script>
     <script src="js/controller.js"></script>
+    <script src="js/viewRenderer.js"></script>
+
   </body>
 </html>

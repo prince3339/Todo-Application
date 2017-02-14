@@ -17,8 +17,7 @@
   //prototype holds methods (to save memory space)
   Todo.prototype = {
     //This method will add new todo
-    add: function (event) {
-      event.preventDefault();
+    add: function (title, description) {
 
       if(this.todoList) {
         var todoList = this.todoList;
@@ -26,9 +25,6 @@
         console.log('Database is empty');
         var todoList = [];
       }
-
-      var title = config.todoTitle.value;
-      var description = config.todoDescription.value;
 
       var todo = {
         id: Math.random().toString(36).substr(2, 9),
@@ -40,36 +36,32 @@
       todoList.push(todo);
       this.saveToLocalStorage('todos', todoList); //Calling this method to save data to localStorage
 
-      var myForm = config.addTodoForm;
+      var myForm = config.elems.addTodoForm;
       myForm.reset();
 
-      showAllTodos();
+      config.fn.showAllTodos();
 
-      this.hide(config.addModal); //Calling this method to hide addModal
+      this.hide(config.elems.addModal); //Calling this method to hide addModal
 
       // 'this' refers to the calling object at execution time
       // makes the method chainable
       return this;
     },
 
-    update: function (event) {
-      event.preventDefault();
-
-      var title_edit = config.todoTitleEdit.value;
-      var description_edit = config.todoDescriptionEdit.value;
-      var todo_edit_id = config.todEditId.value;
-
+    update: function (editableObj) {
       //Updating specific todo using array map
       var updated_list = this.todoList.map(function(objItem) {
         var newObj = {};
-        if(objItem.id == todo_edit_id) {
-          newObj['id'] = todo_edit_id;
-          newObj['title'] = title_edit;
-          newObj['description'] = description_edit;
+        if(objItem.id == editableObj.id) {
+          newObj['id'] = editableObj.id;
+          newObj['title'] = editableObj.title;
+          newObj['description'] = editableObj.description;
+          newObj['status'] = editableObj.status;
         }else {
           newObj['id'] = objItem.id;
           newObj['title'] = objItem.title;
           newObj['description'] = objItem.description;
+          newObj['status'] = objItem.status;
         }
 
         return newObj;
@@ -77,9 +69,9 @@
 
        this.saveToLocalStorage('todos', updated_list); //Calling this method to hide addModal
        //vm.location.reload();
-       showAllTodos();
+       config.fn.showAllTodos();
 
-       this.hide(config.editModal);  //Calling this method to hide editModal
+       this.hide(editableObj.editModal);  //Calling this method to hide editModal
 
        // 'this' refers to the calling object at execution time
        // makes the method chainable
@@ -137,6 +129,21 @@
         // title must be equal
         return 0;
       });
+    },
+    errorMsgGen: function (msg) {
+      var unavailable_msg = document.createElement('li');
+      unavailable_msg.className = 'display-block padding-16 selise__todo__list text-center';
+      unavailable_msg.setAttribute('id', 'unavailable_msg');
+
+      var p = document.createElement('p');
+      p.className = 'font-size-fixed-18 margin-0 opacity-50';
+      p.innerText = config.msg.noCompletedTask;
+
+      unavailable_msg.appendChild(p);
+
+      listContainer.appendChild(unavailable_msg);
+
+      return this;
     }
   }
 
