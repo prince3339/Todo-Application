@@ -4,6 +4,9 @@
 
 //safe code mode
 // here ; is used to make sure that other codes loaded from different library/framework/file finished
+
+//Configuration of the Application
+//It's the container of all actionalable elements
 ;(function (window) {
   'use strict';
   var vm = window;

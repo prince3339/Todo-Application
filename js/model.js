@@ -4,6 +4,8 @@
 
 //safe code mode
 // here ; is used to make sure that other codes loaded from different library/framework/file finished
+
+//It's the actual Data on which we'll perform various actions
 ;(function (window) {
   'use strict';
   var vm = window;

@@ -5,6 +5,11 @@
 
 //safe code mode
 // here ; is used to make sure that other codes loaded from different library/framework/file finished
+
+//A little library to perform various operations like hide, show, sorting, add etc for our Todo Application
+//Usages:
+//Can be accessed like Todo().add().show() or T$().add().show()
+
 ;(function (global) {
   'use strict';
   var vm = global;

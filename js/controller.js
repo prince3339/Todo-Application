@@ -4,6 +4,9 @@
 
 //safe code mode
 // here ; is used to make sure that other codes loaded from different library/framework/file finished
+
+//Main Controller of the Application
+//Major logics is here
 ;(function(window){
  'use strict';
   var vm = window;
