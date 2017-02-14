@@ -5,87 +5,62 @@
 (function (window) {
   var vm = window;
   vm.showAllTodos = showAllTodos;
-  vm.showSearchedList = showSearchedList;
   // vm.onload = function() {
   //   console.log(window.l);
   // }
 
   function showAllTodos (status, search_keyword){
 
-    vm.todos = JSON.parse(localStorage.getItem("todos"));
+    var todos = getTodos();
 
-    var listContainer = document.getElementById('listContainer');
+    var listContainer = config.listContainer;
     listContainer.innerHTML = '';
 
-    var status = status || document.querySelector('input[name=filter_todo]:checked').value;
+    var status = status || config.checkedRadioBtn.value;
     if(localStorage.todos) {
       switch (status) {
           case 'all':
               if(search_keyword) {
-                var searchedList = getSearchedResult(search_keyword, vm.todos);
-                var todos_sorted = sortList(searchedList);
+                var searchedList = T$().getSearchedResult(search_keyword, todos);
+                var todos_sorted = T$().sortList(searchedList);
               }else {
-                var todos_sorted = sortList(vm.todos);
+                var todos_sorted = T$().sortList(todos);
               }
               break;
           case 'done':
-              var filtered_done = vm.todos.filter(function(value) {
+              var filtered_done = todos.filter(function(value) {
                 return value.status == true;
               });
               if(search_keyword) {
-                var searchedList = getSearchedResult(search_keyword, filtered_done);
-                var todos_sorted = sortList(searchedList);
+                var searchedList = T$().getSearchedResult(search_keyword, filtered_done);
+                var todos_sorted = T$().sortList(searchedList);
               }else {
-                var todos_sorted = sortList(filtered_done);
+                var todos_sorted = T$().sortList(filtered_done);
               }
               break;
           case 'pending':
-              var filtered_pending = vm.todos.filter(function(value) {
+              var filtered_pending = todos.filter(function(value) {
                 return value.status != true;
               });
               if(search_keyword) {
-                var searchedList = getSearchedResult(search_keyword, filtered_pending);
-                var todos_sorted = sortList(searchedList);
+                var searchedList = T$().getSearchedResult(search_keyword, filtered_pending);
+                var todos_sorted = T$().sortList(searchedList);
               }else {
-                var todos_sorted = sortList(filtered_pending);
+                var todos_sorted = T$().sortList(filtered_pending);
               }
               break;
           default:
               if(search_keyword) {
-                var searchedList = getSearchedResult(search_keyword, vm.todos);
+                var searchedList = T$().getSearchedResult(search_keyword, todos);
                 var todos_sorted = sortList(searchedList);
               }else {
-                var todos_sorted = sortList(vm.todos);
+                var todos_sorted = T$().sortList(todos);
               }
       }
 
       var unavailable_msg = document.getElementById('unavailable_msg');
       if(unavailable_msg) {
         unavailable_msg.className = 'display-none';
-      }
-
-      //Get search result
-      function getSearchedResult(search_keyword, lists) {
-        return lists.filter(function(list) {
-          return list.title.toLowerCase().indexOf(search_keyword.toLowerCase()) !=-1 || list.description.toLowerCase().indexOf(search_keyword.toLowerCase()) !=-1;
-        });
-      }
-
-      // sort by title
-      function sortList(list) {
-        return list.sort(function(a, b) {
-          var titleA = a.title.toUpperCase(); // ignore upper and lowercase
-          var titleB = b.title.toUpperCase(); // ignore upper and lowercase
-          if (titleA < titleB) {
-            return -1;
-          }
-          if (titleA > titleB) {
-            return 1;
-          }
-
-          // title must be equal
-          return 0;
-        });
       }
 
 
@@ -223,9 +198,6 @@
       }
     }
 
-  function showSearchedList() {
-    var search_keyword = document.getElementById('search_key_word').value;
-    vm.showAllTodos('', search_keyword);
-  }
+
 
 })(window)

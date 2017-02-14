@@ -9,16 +9,17 @@
   var vm = window;
 
   vm.config = {
-    todoTitle : document.getElementById('title'),
-    todoDescription : document.getElementById('description'),
-    todoTitleEdit : document.getElementById('title_edit'),
-    todoDescriptionEdit : document.getElementById('description_edit'),
-    todEditId : document.getElementById('todo_edit_id'),
-    addTodoForm : document.getElementsByName('add_todo_form')[0],
-    addModal : document.getElementById('addModal'),
-    editModal : document.getElementById('editModal'),
-    listContainer : document.getElementById('listContainer'),
-    checkedRadioBtn : document.querySelector('input[name=filter_todo]:checked'),
+    todoTitle: document.getElementById('title'),
+    todoDescription: document.getElementById('description'),
+    todoTitleEdit: document.getElementById('title_edit'),
+    todoDescriptionEdit: document.getElementById('description_edit'),
+    todEditId: document.getElementById('todo_edit_id'),
+    addTodoForm: document.getElementsByName('add_todo_form')[0],
+    addModal: document.getElementById('addModal'),
+    editModal: document.getElementById('editModal'),
+    listContainer: document.getElementById('listContainer'),
+    checkedRadioBtn: document.querySelector('input[name=filter_todo]:checked'),
+    searchKeyWordElem: document.getElementById('search_key_word')
   }
 
 })(window)

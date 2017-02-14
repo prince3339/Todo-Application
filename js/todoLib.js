@@ -75,47 +75,69 @@
         return newObj;
       });
 
-     this.saveToLocalStorage('todos', updated_list); //Calling this method to hide addModal
-     //vm.location.reload();
-     showAllTodos();
+       this.saveToLocalStorage('todos', updated_list); //Calling this method to hide addModal
+       //vm.location.reload();
+       showAllTodos();
 
-     this.hide(config.editModal);  //Calling this method to hide editModal
+       this.hide(config.editModal);  //Calling this method to hide editModal
 
-     // 'this' refers to the calling object at execution time
-     // makes the method chainable
-     return this;
-   },
+       // 'this' refers to the calling object at execution time
+       // makes the method chainable
+       return this;
+    },
 
-   hide: function (elem) {
-     elem.style.display = "none";
+    hide: function (elem) {
+      elem.style.display = "none";
 
-     // 'this' refers to the calling object at execution time
-     // makes the method chainable
-     return this;
-   },
-   show: function (elem) {
-     elem.style.display = "block";
+      // 'this' refers to the calling object at execution time
+      // makes the method chainable
+      return this;
+    },
+    show: function (elem) {
+      elem.style.display = "block";
 
-     // 'this' refers to the calling object at execution time
-     // makes the method chainable
-     return this;
-   },
+      // 'this' refers to the calling object at execution time
+      // makes the method chainable
+      return this;
+    },
 
-   saveToLocalStorage: function (key, data) {
-     localStorage.setItem(key, JSON.stringify(data));
+    saveToLocalStorage: function (key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
 
-     // 'this' refers to the calling object at execution time
-     // makes the method chainable
-     return this;
-   },
+      // 'this' refers to the calling object at execution time
+      // makes the method chainable
+      return this;
+    },
 
-   removeFromLocalStorage: function(key) {
-     localStorage.removeItem(key);
+    removeFromLocalStorage: function(key) {
+      localStorage.removeItem(key);
 
-     // 'this' refers to the calling object at execution time
-     // makes the method chainable
-     return this;
-   }
+      // 'this' refers to the calling object at execution time
+      // makes the method chainable
+      return this;
+    },
+    //This method will return searched list
+    getSearchedResult: function (search_keyword, data) {
+      return data.filter(function(item) {
+        return item.title.toLowerCase().indexOf(search_keyword.toLowerCase()) !=-1 || item.description.toLowerCase().indexOf(search_keyword.toLowerCase()) !=-1;
+      });
+    },
+    //This method will return sorted list
+    sortList : function (data) {
+      return data.sort(function(a, b) {
+        var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+        var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+        if (titleA < titleB) {
+          return -1; //Title A will stay top
+        }
+        if (titleA > titleB) {
+          return 1; //Title B will stay top
+        }
+
+        // title must be equal
+        return 0;
+      });
+    }
   }
 
   //This function will return value when Todo.init object w'll be created

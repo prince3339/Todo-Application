@@ -19,11 +19,13 @@
 
   function markComplete (element, id) {
     var data = getTodos();
-    for(var i=0; i<data.length; i++) {
-      if (data[i].id === id) {
-        element.checked ? data[i].status = true : data[i].status = false;
-      }
-    }
+
+    data.forEach(function(item) {
+        console.log(item.id);
+        if (item.id === id) {
+          element.checked ? item.status = true : item.status = false;
+        }
+    });
 
     T$().saveToLocalStorage('todos', data);
     showAllTodos();
@@ -34,11 +36,13 @@
     var data = getTodos();
     var isConfirm = confirm('Are you sure you want to delete this task?');
     if(isConfirm) {
-      for(var i=0; i<data.length; i++) {
-        if (data[i].id === id) {
-          data.splice(i, 1);
-        }
-      }
+      data.forEach(function(item, index) {
+          console.log(item.id, index);
+          if (item.id === id) {
+            data.splice(index, 1);
+          }
+      });
+
       if(data.length == 0) {
         console.log('All items deleted.');
         T$().removeFromLocalStorage('todos')
@@ -82,6 +86,11 @@
     T$().hide(config.editModal);
   }
 
+  function showSearchedList() {
+    var search_keyword = searchKeyWordElem.value;
+    showAllTodos('', search_keyword);
+  }
+
 
   vm.onload = function() {
     vm.addTodo = addTodo;
@@ -92,6 +101,8 @@
     vm.closeAddModal = closeAddModal;
     vm.showEditModal = showEditModal;
     vm.closeEditModal = closeEditModal;
+    vm.showSearchedList = showSearchedList;
+    
     vm.onclick = function(event) {
         switch (event.target) {
           case config.addModal:
