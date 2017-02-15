@@ -79,7 +79,7 @@
             button_1.appendChild(i_1);
 
             var button_2 = document.createElement('button');
-            button_2.className = 'border-none cur-pointer padding-5';
+            button_2.className = 'border-none cur-pointer padding-v-5 padding-h-8';
             button_2.setAttribute('role', 'button');
             button_2.setAttribute('aria-label', 'Delete this task');
             button_2.setAttribute('onclick', "config.fn.deleteTask(" + "'" + todos_sorted[i].id + "'" + ")");
