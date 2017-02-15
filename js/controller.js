@@ -53,39 +53,14 @@
 
   function markComplete (element, id) {
     var data = getTodos();
-
-    data.forEach(function(item) {
-        console.log(item.id);
-        if (item.id === id) {
-          element.checked ? item.status = true : item.status = false;
-        }
-    });
-
+    T$().completeToggle(data, element, id);
     T$().saveToLocalStorage('todos', data);
     config.fn.showAllTodos('');
   }
 
   function deleteTask (id) {
     var data = getTodos();
-    var isConfirm = confirm('Are you sure you want to delete this task?');
-    if(isConfirm) {
-      data.forEach(function(item, index) {
-          console.log(item.id, index);
-          if (item.id === id) {
-            data.splice(index, 1);
-          }
-      });
-
-      if(data.length == 0) {
-        console.log('All items deleted.');
-        T$().removeFromLocalStorage('todos')
-        config.fn.showAllTodos();
-      }else {
-        T$().saveToLocalStorage('todos', data);
-        config.fn.showAllTodos();
-      }
-
-    }
+    T$().deleteTask(data, id);
   }
 
   function showAddModal (event) {
