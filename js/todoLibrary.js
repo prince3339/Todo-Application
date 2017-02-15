@@ -41,9 +41,7 @@
       todoList.push(todo);
       this.saveToLocalStorage('todos', todoList); //Calling this method to save data to localStorage
 
-      var myForm = config.elems.addTodoForm;
-      myForm.reset();
-
+      config.elems.addTodoForm.reset();
       config.fn.showAllTodos();
 
       this.hide(config.elems.addModal); //Calling this method to hide addModal
