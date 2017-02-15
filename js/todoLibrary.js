@@ -24,21 +24,24 @@
     Todo.prototype = {
         //This method will add new todo
         add: function(title, description) {
-
+            var todoList;
             if (this.todoList) {
-                var todoList = this.todoList;
+                todoList = this.todoList;
             } else {
                 console.log('Database is empty');
-                var todoList = [];
+                todoList = [];
             }
 
-            var todo = {
+            if (title !== "" || description !== "") {
+                var todo = {
                     id: Math.random().toString(36).substr(2, 9),
                     title: title,
                     description: description,
                     status: false
                 }
-                //console.log(todos);
+            }
+
+            //console.log(todos);
             todoList.push(todo);
             this.saveToLocalStorage('todos', todoList); //Calling this method to save data to localStorage
 
@@ -57,15 +60,15 @@
             var updated_list = this.todoList.map(function(objItem) {
                 var newObj = {};
                 if (objItem.id == editableObj.id) {
-                    newObj['id'] = editableObj.id;
-                    newObj['title'] = editableObj.title;
-                    newObj['description'] = editableObj.description;
-                    newObj['status'] = editableObj.status;
+                    newObj.id = editableObj.id;
+                    newObj.title = editableObj.title;
+                    newObj.description = editableObj.description;
+                    newObj.status = editableObj.status;
                 } else {
-                    newObj['id'] = objItem.id;
-                    newObj['title'] = objItem.title;
-                    newObj['description'] = objItem.description;
-                    newObj['status'] = objItem.status;
+                    newObj.id = objItem.id;
+                    newObj.title = objItem.title;
+                    newObj.description = objItem.description;
+                    newObj.status = objItem.status;
                 }
 
                 return newObj;
