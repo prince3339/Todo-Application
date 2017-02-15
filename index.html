@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,214 +9,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <!--Add modal start-->
-    <div  id="addModal"
-          class="selise__modal">
+    <div id="addModal" class="selise__modal">
         <section class="selise__modal__content selise__todo__container">
             <div class="full-width">
-              <main class="margin-top-10">
-                <form name="add_todo_form"
-                      onsubmit="config.fn.addTodo(event)">
-                  <section class="selise__todo__container__inner padding-16">
-                    <header class="text-center opacity-50 margin-bottom-16">
-                      <h1 class="margin-0 font-size-fixed-24">Add New Todo</h1>
-                    </header>
-                    <main>
-                        <input class="selise__todo__search__input border"
-                               type="search"
-                               name="title"
-                               placeholder="Title"
-                               id="title"
-                               required>
-                        <textarea class="selise__todo__search__input border margin-top-20"
-                                  name="description"
-                                  rows="4" cols="50"
-                                  id="description"
-                                  placeholder="Describe here..."></textarea>
-                    </main>
-                    <footer class="margin-top-20">
-                        <input class="padding-16 cur-pointer font-size-fixed-16 opacity-50 margin-0"
-                              type="submit"
-                              value="Add">
-                        <!-- <i class="zmdi zmdi-plus font-size-fixed-32 opacity-50"></i> -->
+                <main class="margin-top-10">
+                    <form name="add_todo_form" onsubmit="config.fn.addTodo(event)">
+                        <section class="selise__todo__container__inner padding-16">
+                            <header class="text-center opacity-50 margin-bottom-16">
+                                <h1 class="margin-0 font-size-fixed-24">Add New Todo</h1>
+                            </header>
+                            <main>
+                                <input class="selise__todo__search__input border" type="search" name="title" placeholder="Title" id="title" required>
+                                <textarea class="selise__todo__search__input border margin-top-20" name="description" rows="4" cols="50" id="description" placeholder="Describe here..."></textarea>
+                            </main>
+                            <footer class="margin-top-20">
+                                <input class="padding-16 cur-pointer font-size-fixed-16 opacity-50 margin-0" type="submit" value="Add">
+                                <!-- <i class="zmdi zmdi-plus font-size-fixed-32 opacity-50"></i> -->
 
-                        <!-- <span class="padding-16 cur-pointer"
+                                <!-- <span class="padding-16 cur-pointer"
                               onclick="closeModal(event)">
                           <i class="zmdi zmdi-close font-size-fixed-32 opacity-50"></i>
                         </span> -->
 
-                        <button type="button"
-                                name="button"
-                                onclick="config.fn.closeAddModal(event)"
-                                class="padding-16 cur-pointer margin-left-16 font-size-fixed-16 opacity-50">
+                                <button type="button" name="button" onclick="config.fn.closeAddModal(event)" class="padding-16 cur-pointer margin-left-16 font-size-fixed-16 opacity-50">
                           Cancel
                         </button>
-                    </footer>
-                  </section>
-                </form>
-              </main>
+                            </footer>
+                        </section>
+                    </form>
+                </main>
             </div>
-          </section>
-    </div><!--Add modal end-->
+        </section>
+    </div>
+    <!--Add modal end-->
 
     <!--Edit modal start-->
-    <div  id="editModal"
-          class="selise__modal">
+    <div id="editModal" class="selise__modal">
         <section class="selise__modal__content selise__todo__container">
             <div class="full-width">
-              <main class="margin-top-10">
-                <form name="edit_todo_form"
-                      onsubmit="config.fn.updateTodo(event)">
-                  <section class="selise__todo__container__inner padding-16">
-                    <header class="text-center opacity-50 margin-bottom-16">
-                      <h1 class="margin-0 font-size-fixed-24">Edit this Todo</h1>
-                    </header>
-                    <main>
-                        <input class="selise__todo__search__input border"
-                               type="search"
-                               name="title_edit"
-                               placeholder="Title"
-                               id="title_edit"
-                               required>
-                        <textarea class="selise__todo__search__input border margin-top-20"
-                                  name="description_edit"
-                                  rows="4" cols="50"
-                                  id="description_edit"
-                                  placeholder="Describe here..."></textarea>
-                        <input type="hidden"
-                               name="todo_edit_id"
-                               value=""
-                               id="todo_edit_id">
-                    </main>
-                    <footer class="margin-top-20">
-                        <input class="padding-16 cur-pointer font-size-fixed-16 opacity-50 margin-0"
-                              type="submit"
-                              value="Update">
-                        <!-- <i class="zmdi zmdi-plus font-size-fixed-32 opacity-50"></i> -->
+                <main class="margin-top-10">
+                    <form name="edit_todo_form" onsubmit="config.fn.updateTodo(event)">
+                        <section class="selise__todo__container__inner padding-16">
+                            <header class="text-center opacity-50 margin-bottom-16">
+                                <h1 class="margin-0 font-size-fixed-24">Edit this Todo</h1>
+                            </header>
+                            <main>
+                                <input class="selise__todo__search__input border" type="search" name="title_edit" placeholder="Title" id="title_edit" required>
+                                <textarea class="selise__todo__search__input border margin-top-20" name="description_edit" rows="4" cols="50" id="description_edit" placeholder="Describe here..."></textarea>
+                                <input type="hidden" name="todo_edit_id" value="" id="todo_edit_id">
+                            </main>
+                            <footer class="margin-top-20">
+                                <input class="padding-16 cur-pointer font-size-fixed-16 opacity-50 margin-0" type="submit" value="Update">
+                                <!-- <i class="zmdi zmdi-plus font-size-fixed-32 opacity-50"></i> -->
 
-                        <!-- <span class="padding-16 cur-pointer"
+                                <!-- <span class="padding-16 cur-pointer"
                               onclick="closeModal(event)">
                           <i class="zmdi zmdi-close font-size-fixed-32 opacity-50"></i>
                         </span> -->
 
-                        <button type="button"
-                                name="button"
-                                onclick="config.fn.closeEditModal(event)"
-                                class="padding-16 cur-pointer margin-left-16 font-size-fixed-16 opacity-50">
+                                <button type="button" name="button" onclick="config.fn.closeEditModal(event)" class="padding-16 cur-pointer margin-left-16 font-size-fixed-16 opacity-50">
                           Cancel
                         </button>
-                    </footer>
-                  </section>
-                </form>
-              </main>
+                            </footer>
+                        </section>
+                    </form>
+                </main>
             </div>
-          </section>
-    </div><!--edit modal end-->
+        </section>
+    </div>
+    <!--edit modal end-->
 
     <!-- todo container start -->
     <section class="selise__todo__container__inner selise__todo__container">
         <header class="selise__todo__search border-bottom flex-direction__row flex-justify-content__flex-start flex-align-items__center">
-          <a href="#"
-             title="My Logo"
-             class="display-inline-block v-mid selise__logo border-right height-50">
-             <img src="https://www.sketchappsources.com/resources/source-image/sketch-3-todo-list-app-icon-template.png"
-                  alt="My logo"
-                  width="70"
-                  class="full-height">
-           </a>
-          <form name="todo_search"
-                class="flex__1">
-            <input class="selise__todo__search__input font-size-fixed-16"
-                   type="search"
-                   name="todo_search"
-                   placeholder="Search Todos"
-                   onkeyup="config.fn.showSearchedList()"
-                   id="search_key_word">
-          </form>
+            <a href="#" title="My Logo" class="display-inline-block v-mid selise__logo border-right height-50">
+                <img src="https://www.sketchappsources.com/resources/source-image/sketch-3-todo-list-app-icon-template.png" alt="My logo" width="70" class="full-height">
+            </a>
+            <form name="todo_search" class="flex__1">
+                <input class="selise__todo__search__input font-size-fixed-16" type="search" name="todo_search" placeholder="Search Todos" onkeyup="config.fn.showSearchedList()" id="search_key_word">
+            </form>
 
-          <button type="button"
-                  name="button"
-                  onclick="config.fn.showAddModal(event)"
-                  tabindex="0"
-                  role="button"
-                  class="cur-pointer display-inline-block selise__todo__open-modal border-none margin-right-16"
-                  aria-label="Open add task modal">
+            <button type="button" name="button" onclick="config.fn.showAddModal(event)" tabindex="0" role="button" class="cur-pointer display-inline-block selise__todo__open-modal border-none margin-right-16" aria-label="Open add task modal">
               <i class="zmdi zmdi-plus-circle font-size-fixed-32"></i>
           </button>
         </header>
         <main>
-          <section class="selise__todo__filter border-bottom overlay-5 flex-direction__row flex-justify-content__center flex-align-items__center">
-            <form name="selise__todo__filter__form">
-              <input class="margin-0"
-                     type="radio"
-                     name="filter_todo"
-                     value="all"
-                     checked
-                     onchange="config.fn.showAllTodos('all')"
-                     id="showAllList">
-                     <label class="font-size-fixed-14 margin-right-15 padding-left-5"
-                            for="showAllList">All</label>
-              <input class="margin-0"
-                     type="radio"
-                     name="filter_todo"
-                     value="done"
-                     onchange="config.fn.showAllTodos('done')"
-                     id="showDoneList">
-                     <label class="font-size-fixed-14 margin-right-15 padding-left-5"
-                            for="showDoneList">Done</label>
-              <input class="margin-0"
-                     type="radio"
-                     name="filter_todo"
-                     value="pending"
-                     onchange="config.fn.showAllTodos('pending')"
-                     id="showPendingList">
-                     <label class="font-size-fixed-14 padding-left-5"
-                            for="showPendingList">Pending</label>
-            </form>
-          </section>
+            <section class="selise__todo__filter border-bottom overlay-5 flex-direction__row flex-justify-content__center flex-align-items__center">
+                <form name="selise__todo__filter__form">
+                    <input class="margin-0" type="radio" name="filter_todo" value="all" checked onchange="config.fn.showAllTodos('all')" id="showAllList">
+                    <label class="font-size-fixed-14 margin-right-15 padding-left-5" for="showAllList">All</label>
+                    <input class="margin-0" type="radio" name="filter_todo" value="done" onchange="config.fn.showAllTodos('done')" id="showDoneList">
+                    <label class="font-size-fixed-14 margin-right-15 padding-left-5" for="showDoneList">Done</label>
+                    <input class="margin-0" type="radio" name="filter_todo" value="pending" onchange="config.fn.showAllTodos('pending')" id="showPendingList">
+                    <label class="font-size-fixed-14 padding-left-5" for="showPendingList">Pending</label>
+                </form>
+            </section>
 
-          <ul class="selise__todo__lists"
-              id="listContainer">
+            <ul class="selise__todo__lists" id="listContainer">
 
-          </ul>
+            </ul>
 
-          <section class="flex-direction__row flex-wrap__wrap border-top margin-bottom-24 padding-top-24">
-            <article class="width-180 border margin-8 position-relative" tabindex="0">
-                <span class="square-3 border text-center display-inline-block position-absolute right-0">
+            <section class="flex-direction__row flex-wrap__wrap border-top margin-bottom-24 padding-top-24">
+                <article class="width-180 border margin-8 position-relative" tabindex="0">
+                    <span class="square-3 border text-center display-inline-block position-absolute right-0 overlay-10">
                   1
                 </span>
-              <div class=" padding-16">
-                <h3 class="font-size-fixed-16 opacity-50 margin-0">Title 1</h3>
-                <p class="font-size-fixed-14 opacity-50 margin-0 line-height-big">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
-                </p>
-              </div>
-            </article>
-            <article class="width-180 border margin-8 position-relative" tabindex="0">
-                <span class="square-3 border text-center display-inline-block position-absolute right-0">
+                    <div class=" padding-16">
+                        <h3 class="font-size-fixed-16 opacity-50 margin-0">Title 1</h3>
+                        <p class="font-size-fixed-14 opacity-50 margin-0 line-height-big">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
+                        </p>
+                    </div>
+                </article>
+                <article class="width-180 border margin-8 position-relative" tabindex="0">
+                    <span class="square-3 border text-center display-inline-block position-absolute right-0 overlay-10">
                   2
                 </span>
-              <div class=" padding-16">
-                <h3 class="font-size-fixed-16 opacity-50 margin-0">Title 1</h3>
-                <p class="font-size-fixed-14 opacity-50 margin-0 line-height-big">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
-                </p>
-              </div>
-            </article>
-            <article class="width-180 border margin-8 position-relative" tabindex="0">
-                <span class="square-3 border text-center display-inline-block position-absolute right-0">
+                    <div class=" padding-16">
+                        <h3 class="font-size-fixed-16 opacity-50 margin-0">Title 1</h3>
+                        <p class="font-size-fixed-14 opacity-50 margin-0 line-height-big">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
+                        </p>
+                    </div>
+                </article>
+                <article class="width-180 border margin-8 position-relative" tabindex="0">
+                    <span class="square-3 border text-center display-inline-block position-absolute right-0 overlay-10">
                   3
                 </span>
-              <div class=" padding-16">
-                <h3 class="font-size-fixed-16 opacity-50 margin-0">Title 1</h3>
-                <p class="font-size-fixed-14 opacity-50 margin-0 line-height-big">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
-                </p>
-              </div>
-            </article>
-            <!-- <div class="width-180 border margin-8">
+                    <div class=" padding-16">
+                        <h3 class="font-size-fixed-16 opacity-50 margin-0">Title 1</h3>
+                        <p class="font-size-fixed-14 opacity-50 margin-0 line-height-big">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.
+                        </p>
+                    </div>
+                </article>
+                <!-- <div class="width-180 border margin-8">
               <img src="http://www.intrawallpaper.com/static/images/Golden-Gate-Bridge-HD-Wallpapers-WideScreen_FK1cfem.jpg"
                    alt="cover photo"
                    class="full-width"
@@ -227,34 +159,29 @@
                    class="full-width"
                    height="150">
             </div> -->
-          </section>
+            </section>
         </main>
         <footer class="selise__todo__footer padding-16 border-top flex-direction__row flex-justify-content__space-between flex-align-items__center">
             <span class="font-size-fixed-12 opacity-60">
               &copy;Sabbir Ahmed Siddiquee
             </span>
             <nav>
-              <ul class="flex-direction__row">
-                <li>
-                  <a href="#"
-                     role="link"
-                     title="menu 2"
-                     class="font-size-fixed-12 padding-5 opacity-60">
+                <ul class="flex-direction__row">
+                    <li>
+                        <a href="#" role="link" title="menu 2" class="font-size-fixed-12 padding-5 opacity-60">
                      Menu 1
                    </a>
-                </li>
-                <li>
-                  <a href="#"
-                     role="link"
-                     title="menu 2"
-                     class="font-size-fixed-12 padding-5 opacity-60">
+                    </li>
+                    <li>
+                        <a href="#" role="link" title="menu 2" class="font-size-fixed-12 padding-5 opacity-60">
                      Menu 1
                    </a>
-                </li>
-              </ul>
+                    </li>
+                </ul>
             </nav>
         </footer>
-    </section><!-- todo container end -->
+    </section>
+    <!-- todo container end -->
     <script src="js/settings.js"></script>
     <script src="js/model.js"></script>
     <script src="js/todoLibrary.js"></script>
@@ -262,5 +189,6 @@
     <script src="js/viewRenderer.js"></script>
     <script src="js/viewService.js"></script>
 
-  </body>
+</body>
+
 </html>
