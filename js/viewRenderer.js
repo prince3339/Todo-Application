@@ -13,7 +13,8 @@
     config.fn.renderView = renderView;
 
     function renderView(todos_sorted) {
-        for (var i = 0; i < todos_sorted.length; i++) {
+        todos_sorted.forEach(function(todo, index) {
+
             //console.log(todos[i].title);
 
             var li = document.createElement('li');
@@ -21,7 +22,7 @@
             li.setAttribute('tabindex', 0);
 
             var div_1 = document.createElement('div');
-            if (todos_sorted[i].status) {
+            if (todo.status) {
                 div_1.className = 'flex__1 border-right padding-right-20 padding-8 selise__todo__list--completed';
             } else {
                 div_1.className = 'flex__1 border-right padding-right-20 padding-8';
@@ -33,7 +34,7 @@
 
             var h3 = document.createElement('h3');
             h3.className = 'margin-0 font-size-fixed-16 line-height-normal opacity-50';
-            h3.innerText = todos_sorted[i].title;
+            h3.innerText = todo.title;
 
             div_2.appendChild(h3);
 
@@ -41,9 +42,9 @@
             checkBox.setAttribute("type", "checkbox");
             checkBox.setAttribute("name", "todo_list");
             checkBox.className = 'done_todo';
-            checkBox.setAttribute('onChange', "config.fn.markComplete(this," + "'" + todos_sorted[i].id + "'" + ")");
+            checkBox.setAttribute('onChange', "config.fn.markComplete(this," + "'" + todo.id + "'" + ")");
 
-            if (todos_sorted[i].status) {
+            if (todo.status) {
                 checkBox.setAttribute("checked", "true");
             } else {
                 checkBox.removeAttribute("checked");
@@ -53,7 +54,7 @@
 
             var p = document.createElement('p');
             p.className = 'font-size-fixed-14 margin-0 opacity-50 line-height-big margin-top-10';
-            p.innerText = todos_sorted[i].description;
+            p.innerText = todo.description;
 
             div_1.appendChild(div_2);
             div_1.appendChild(p);
@@ -67,8 +68,8 @@
             button_1.className = 'margin-h-5 padding-5 border-none cur-pointer';
             button_1.setAttribute('role', 'button');
             button_1.setAttribute('aria-label', 'Make task done');
-            button_1.setAttribute('onclick', "config.fn.showEditModal( event, " + "'" + todos_sorted[i].id + "'" + ")");
-            if (todos_sorted[i].status) {
+            button_1.setAttribute('onclick', "config.fn.showEditModal( event, " + "'" + todo.id + "'" + ")");
+            if (todo.status) {
                 button_1.setAttribute('disabled', 'true');
                 button_1.className = 'margin-h-5 padding-5 border-none cur-not-allowed';
             }
@@ -82,7 +83,7 @@
             button_2.className = 'border-none cur-pointer padding-v-5 padding-h-8';
             button_2.setAttribute('role', 'button');
             button_2.setAttribute('aria-label', 'Delete this task');
-            button_2.setAttribute('onclick', "config.fn.deleteTask(" + "'" + todos_sorted[i].id + "'" + ")");
+            button_2.setAttribute('onclick', "config.fn.deleteTask(" + "'" + todo.id + "'" + ")");
 
             var i_2 = document.createElement('i');
             i_2.className = 'zmdi zmdi-delete font-size-fixed-18 opacity-50';
@@ -95,7 +96,7 @@
             li.appendChild(div_3);
 
             listContainer.appendChild(li);
-        }
+        });
     }
 
 })(window)
